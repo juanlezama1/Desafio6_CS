@@ -1,5 +1,6 @@
 import { Router } from "express"
 import ProductManager from '../config/ProductManager.js'
+import { productModel } from "../models/products.js"
 let gestor_productos = new ProductManager ('./SRC/DataBase/db.json')
 
 const productsRouter = Router ()
@@ -7,8 +8,8 @@ const productsRouter = Router ()
 productsRouter.get('/', async (req, res) => {
     const {limit} = req.query // Si no se mandó, tendrá el valor 'undefined'
     console.log("Enviando productos al cliente...")
-
-    let my_products = await gestor_productos.getProducts()
+    console.log(await productModel.find())
+    // let my_products = await gestor_productos.getProducts()
 
     if (my_products === -1) // Caso de que la DB esté vacía
         res.status(200).render('templates/error', {error_description: "Sin productos por ahora"})

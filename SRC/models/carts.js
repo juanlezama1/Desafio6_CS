@@ -7,6 +7,6 @@ const cartSchema = new Schema ({
     quantity: Number
 })
 
-// Exporto este prototipo como una colección
+// Exporto este prototipo en mi colección
 
 export const cartModel = model ("carts", cartSchema)

@@ -7,6 +7,6 @@ const messageSchema = new Schema ({
     message: String
 })
 
-// Exporto este prototipo como una colección
+// Exporto este prototipo en mi colección
 
 export const messageModel = model ("messages", messageSchema)

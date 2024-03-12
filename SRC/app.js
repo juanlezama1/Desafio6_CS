@@ -1,6 +1,8 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import __dirname from './path.js'
 import productsRouter from './routes/productsRouter.js'
+import usersRouter from './routes/usersRouter.js'
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io'
 
@@ -9,12 +11,17 @@ import { Server } from 'socket.io'
 const my_app = express ()
 const PORT = 8080
 
-// Application middlewares
+// Conexión con DB
+
+mongoose.connect("mongodb+srv://lezamaj:indexport.2011@cluster0.r9uoba0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    .then(() => console.log("Conectado a la DB!"))
+    .catch(error => console.log("Error al conectarse a la DB: ", error))
 
 // Cuando voy a /products, lo gestiona el productsRouter y tiene acceso a la carpeta pública para las imágenes.
+my_app.use(express.json())
 my_app.use('/public', express.static(__dirname + '/public'))
 my_app.use('/products', productsRouter, express.static(__dirname + '/public'))
-my_app.use(express.json())
+my_app.use('/users', usersRouter, express.static(__dirname + '/public'))
 
 // Implementación de Handlebars (motor de plantillas)
 

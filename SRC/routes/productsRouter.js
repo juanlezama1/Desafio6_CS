@@ -98,4 +98,27 @@ productsRouter.delete('/:pid', async (req, res) => {
     )
 })
 
+// CREATE DE UN PRODUCTO
+
+productsRouter.post('/', async (req, res) => {
+
+    console.log("Creando producto ...")
+
+    const new_product = req.body
+
+    try {
+
+        let my_product = await productModel.create(new_product)
+        my_product = await productModel.findById(my_product._id.toString()).lean()
+        res.status(200).render('templates/home_id', {title: 'Producto Creado:', product: my_product})
+        console.log("Producto creado en DB!")
+    }
+
+    catch (error)
+
+    {
+        console.log("Error al crear producto: ", error)
+    }
+})
+
 export default productsRouter

@@ -23,11 +23,6 @@ const productSchema = new Schema ({
         required: true
     },
 
-    id: {
-        type: Schema.Types.ObjectId,
-        required: true
-    },
-
     stock: {
         type: String,
         required: true
